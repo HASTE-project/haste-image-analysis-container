@@ -10,6 +10,8 @@ RUN git clone https://github.com/benblamey/HarmonicPE.git;cd /app/HarmonicPE;git
 # Checkout and install the Haste Storage Client:
 RUN git clone https://github.com/benblamey/HasteStorageClient.git;cd /app/HasteStorageClient;git checkout v0.4;pip3 install -e .
 
+# Install packages for image analysis
+RUN pip install numpy
 
 # Make port 80 available (required for the listening daemon)
 EXPOSE 80
