@@ -13,6 +13,7 @@ RUN git clone https://github.com/benblamey/HasteStorageClient.git;cd /app/HasteS
 # Install packages for image analysis
 RUN pip3 install numpy
 RUN pip3 install Pillow
+RUN pip3 install scikit-image
 
 # Make port 80 available (required for the listening daemon)
 EXPOSE 80
