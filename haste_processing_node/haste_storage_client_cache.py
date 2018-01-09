@@ -31,7 +31,7 @@ def __get_haste_storage_client_config():
         try:
             return __get_magic_haste_client_config_from_server(host)
         except:
-            print('...failed')
+            print('...failed',flush=True)
     print('failed reading config from all locations', flush=True)
 
 
@@ -42,7 +42,7 @@ def get_storage_client(stream_id):
         client = HasteStorageClient(stream_id,
                                     config=haste_storage_client_config)
 
-        print('creating client for stream ID: ' + stream_id)
+        print('creating client for stream ID: ' + stream_id, flush=True)
 
         haste_storage_clients[stream_id] = client
 
@@ -54,4 +54,4 @@ def get_storage_client(stream_id):
 if __name__ == '__main__':
     # Test
     config = __get_haste_storage_client_config()
-    print(config)
+    print(config, flush=True)
