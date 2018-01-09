@@ -1,23 +1,24 @@
 from PIL import Image
 import io
 import numpy as np
-from skimage import greycomatrix, greycoprops
+from skimage.feature import greycomatrix, greycoprops
 
 
 def corr(im):
+    # Needs a 2D image
 
     glcm = greycomatrix(im.astype('uint8'), [1], [0], normed=True)
     stats = greycoprops(glcm, 'correlation')
-    return stats
+    return np.mean(stats)
 
 
 def extract_image_features(metadata, image_bytes):
 
     # TODO extract image features here
-    image = Image.open(io.BytesIO(image_bytes))
+    image = np.array(Image.open(io.BytesIO(image_bytes)))
 
-    image_sum = np.sum(image)
-    image_correlation = corr(image)
+    image_sum = np.sum(image[:, :, 0])
+    image_correlation = corr(image[:, :, 0])
 
     extracted_features = {
         'image_height': 123,
