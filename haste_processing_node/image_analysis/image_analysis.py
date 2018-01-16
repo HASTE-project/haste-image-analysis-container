@@ -35,7 +35,7 @@ def extract_image_features(metadata, image_bytes):
 
 if __name__ == '__main__':
     # Test extraction with the dummy image
-    fh = open('dummy_image_0.png', 'rb')
+    fh = open('dummy_image_0.tif', 'rb')
     image_bytes = bytes(fh.read())
     fh.close()
 
