@@ -11,7 +11,7 @@ def test():
     some_bytes = b'this is some bytes'
 
     # Simulate incoming data originating at the simulator:
-    fh = open('haste_processing_node/image_analysis/dummy_image_0.png', 'rb')
+    fh = open('haste_processing_node/image_analysis/dummy_image_0.tif', 'rb')
     some_bytes = bytes(fh.read())
     fh.close()
 
