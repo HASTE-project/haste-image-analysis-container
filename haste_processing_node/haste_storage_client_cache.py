@@ -42,7 +42,7 @@ def get_storage_client(stream_id):
         client = HasteStorageClient(stream_id,
                                     config=haste_storage_client_config)
 
-        print('creating client for stream ID: ' + stream_id)
+        print('creating client for stream ID: ' + stream_id, flush=True)
 
         haste_storage_clients[stream_id] = client
 
