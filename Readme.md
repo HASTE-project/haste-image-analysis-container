@@ -1,6 +1,6 @@
-Example processing node for [HASTE](http://haste.research.it.uu.se) for use with the [HarmonicIO processing framework](https://github.com/benblamey/HarmonicIO)
+Example processing node for [HASTE](http://haste.research.it.uu.se) for use with the [HarmonicIO processing framework](https://github.com/HASTE-project/HarmonicIO)
 
-**Only works inside a HarmonicIO container (see: https://github.com/benblamey/HarmonicPE)**
+**Only works inside a HarmonicIO container (see: https://github.com/HASTE-project/HarmonicPE)**
 
 ## Features
 * Caching of storage clients for the HASTE Storage Platform.
