@@ -1,15 +1,34 @@
+import cProfile
+import datetime
+
 from harmonicPE.daemon import listen_for_tasks
 
 from .haste_storage_client_cache import get_storage_client
 from .image_analysis.image_analysis import extract_image_features
 from .simulator_messages import split_data_from_simulator
 
-
 # TODO: This will break on MACOSX (see HIO code for fix)
 # import subprocess
 # hostname = subprocess.getoutput('hostname')
 
+
+__processed_message_count = 0
+
+__enable_profiling = True
+__profile = None
+__PROFILING_BATCH_SIZE = 1  # dump profile stats each N messages
+
+
+if __enable_profiling and __profile is None:
+    __profile = cProfile.Profile()
+
+
 def process_data(message_bytes):
+    global __processed_message_count, __enable_profiling, __profile, __PROFILING_BATCH_SIZE
+
+    if __enable_profiling:
+        __profile.enable()
+
     print('message received with length bytes: ' + str(len(message_bytes)), flush=True)
 
     metadata, image_bytes = split_data_from_simulator(message_bytes)
@@ -33,8 +52,14 @@ def process_data(message_bytes):
 
     print('saved to storage!', flush=True)
 
+    __processed_message_count = __processed_message_count + 1
 
-# TODO: add toy example with local image to run extraction locally.
+    if __enable_profiling and __processed_message_count % __PROFILING_BATCH_SIZE == 0:
+        prof_filename = 'profile_' + datetime.datetime.today().strftime('%Y_%m_%d__%H_%M_%S') + '.prof'
+        __profile.disable()
+        __profile.dump_stats(prof_filename)
+        __profile.clear()
+        print('dumped profiling info to: ' + prof_filename, flush=True)
 
 
 if __name__ == '__main__':
