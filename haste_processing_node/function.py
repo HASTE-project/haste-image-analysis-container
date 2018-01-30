@@ -14,13 +14,14 @@ from .simulator_messages import split_data_from_simulator
 
 __processed_message_count = 0
 
-__enable_profiling = True
+__enable_profiling = False
 __profile = None
 __PROFILING_BATCH_SIZE = 1  # dump profile stats each N messages
 
 
 if __enable_profiling and __profile is None:
-    __profile = cProfile.Profile()
+    __profile = cProfile.Profile(builtins=False)
+    __profile.enable()
 
 
 def process_data(message_bytes):
