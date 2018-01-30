@@ -5,10 +5,10 @@ FROM python:3.6.3
 WORKDIR /app
 
 # Checkout and install Harmonic PE:
-RUN git clone https://github.com/benblamey/HarmonicPE.git;cd /app/HarmonicPE;git checkout master;pip3 install -e .
+RUN git clone https://github.com/HASTE-project/HarmonicPE.git;cd /app/HarmonicPE;git checkout master;pip3 install -e .
 
 # Checkout and install the Haste Storage Client:
-RUN git clone https://github.com/benblamey/HasteStorageClient.git;cd /app/HasteStorageClient;git checkout v0.5;pip3 install -e .
+RUN git clone https://github.com/HASTE-project/HasteStorageClient.git;cd /app/HasteStorageClient;git checkout v0.5;pip3 install -e .
 
 # Install packages for image analysis
 RUN pip3 install numpy
