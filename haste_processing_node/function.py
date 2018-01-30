@@ -16,7 +16,8 @@ __processed_message_count = 0
 
 __enable_profiling = False
 __profile = None
-__PROFILING_BATCH_SIZE = 1  # dump profile stats each N messages
+__PROFILING_BATCH_SIZE = 400  # dump profile stats each N messages (should be 500 but we have a bug elsewhere)
+__last_seen_stream_id = None
 
 
 if __enable_profiling and __profile is None:
@@ -55,7 +56,8 @@ def process_data(message_bytes):
 
     __processed_message_count = __processed_message_count + 1
 
-    if __enable_profiling and __processed_message_count % __PROFILING_BATCH_SIZE == 0:
+    if __enable_profiling and (__processed_message_count % __PROFILING_BATCH_SIZE == 0):
+        # This mechanism is fragile - instead base it on the stream ID
         prof_filename = 'profile_' + datetime.datetime.today().strftime('%Y_%m_%d__%H_%M_%S') + '.prof'
         __profile.disable()
         __profile.dump_stats(prof_filename)
