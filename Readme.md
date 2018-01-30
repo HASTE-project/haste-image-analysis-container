@@ -11,3 +11,12 @@ Example processing node for [HASTE](http://haste.research.it.uu.se) for use with
 ```
 docker build -t "benblamey/haste-image-proc:latest" . ; docker push benblamey/haste-image-proc:latest
 ```
+
+## ...with profiling enabled:
+```
+__enable_profiling = True
+```
+
+```
+docker build -t "benblamey/haste-image-proc:latest-profiling" . ; docker push benblamey/haste-image-proc:latest-profiling
+```
