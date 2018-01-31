@@ -22,7 +22,7 @@ __last_seen_stream_id = None
 
 if __enable_profiling and __profile is None:
     __profile = cProfile.Profile(builtins=False)
-    __profile.enable()
+    # Don't enable it yet - we'll count all the time the socket is waiting to connect.
 
 
 def process_data(message_bytes):
