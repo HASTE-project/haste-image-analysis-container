@@ -1,4 +1,5 @@
 from haste_storage_client.core import HasteStorageClient
+from haste.windowed_conformal_model.conformal_interestingness_model import ConformalInterestingnessModel
 
 import json
 import os.path
@@ -39,8 +40,11 @@ def get_storage_client(stream_id):
     if stream_id not in haste_storage_clients:
         haste_storage_client_config = __get_haste_storage_client_config()
 
+        model = ConformalInterestingnessModel()
+
         client = HasteStorageClient(stream_id,
-                                    config=haste_storage_client_config)
+                                    config=haste_storage_client_config,
+                                    interestingness_model=model)
 
         print('creating client for stream ID: ' + stream_id, flush=True)
 
