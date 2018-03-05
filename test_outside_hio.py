@@ -15,7 +15,7 @@ def test():
     some_bytes = bytes(fh.read())
     fh.close()
 
-    process_data(pickle.dumps({'timestamp': time.time(),
+    process_data(pickle.dumps({'timestamp': '1234',
                                'location': (12.34, 56.78),
                                'stream_id': stream_id,
                                'image_length_bytes': len(some_bytes)})

@@ -16,18 +16,22 @@ def process_data(message_bytes):
 
     extracted_features = extract_image_features(metadata, image_bytes)
 
+    # TODO: rename to 'course_features' or 'features_level_0' ?
     metadata['extracted_features'] = extracted_features
 
     # metadata['containerID'] = hostname
 
     # Get a storage client for the cache, and use it to save the blob and all metadata:
-    stream_id = metadata['stream_id']  # Identifies the data in storage - across all processing nodes.
-    timestamp_cloud_edge = metadata['timestamp']
+    stream_id = metadata.pop('stream_id')  # Identifies the data in storage - across all processing nodes. Required.
+    timestamp_cloud_edge = metadata.pop('timestamp')  # Required
+    location = metadata.pop('location', None)  # Optional
+    substream_id = metadata.pop('substream_id', None)  # Optional
 
     haste_storage_client = get_storage_client(stream_id)
 
     haste_storage_client.save(timestamp_cloud_edge,
-                              metadata['location'],
+                              location,
+                              substream_id,
                               image_bytes,
                               metadata)
 
