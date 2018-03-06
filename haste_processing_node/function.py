@@ -42,5 +42,6 @@ def process_data(message_bytes):
 
 
 if __name__ == '__main__':
+    # Container Entry-point
     # Start the daemon to listen for tasks:
     listen_for_tasks(process_data)
