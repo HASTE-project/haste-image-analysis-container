@@ -1,4 +1,5 @@
-from haste_storage_client.core import HasteStorageClient
+from haste_storage_client.core import HasteStorageClient, OS_SWIFT_STORAGE, TRASH
+
 from haste.windowed_conformal_model.conformal_interestingness_model import ConformalInterestingnessModel
 
 import json
@@ -44,7 +45,9 @@ def get_storage_client(stream_id):
 
         client = HasteStorageClient(stream_id,
                                     config=haste_storage_client_config,
-                                    interestingness_model=model)
+                                    interestingness_model=model,
+                                    storage_policy=[(0.5, 1.0, OS_SWIFT_STORAGE)],
+                                    default_storage=TRASH)  # discard blobs which don't match the policy above.
 
         print('creating client for stream ID: ' + stream_id, flush=True)
 
