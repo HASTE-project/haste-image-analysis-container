@@ -18,6 +18,9 @@ RUN pip3 install numpy
 RUN pip3 install Pillow
 RUN pip3 install scikit-image
 
+# TODO investigate installing scikit-sparse here?
+#RUN conda install -c conda-forge scikit-sparse
+
 # Make port 80 available (required for the listening daemon)
 EXPOSE 80
 
