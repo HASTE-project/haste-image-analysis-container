@@ -8,7 +8,7 @@ WORKDIR /app
 RUN git clone https://github.com/HASTE-project/HarmonicPE.git;cd /app/HarmonicPE;git checkout master;pip3 install -e .
 
 # Checkout and install the Haste Storage Client (specific version):
-RUN git clone https://github.com/HASTE-project/HasteStorageClient.git;cd /app/HasteStorageClient;git checkout v0.7;pip3 install -e .
+RUN git clone https://github.com/HASTE-project/HasteStorageClient.git;cd /app/HasteStorageClient;git checkout v0.8;pip3 install -e .
 
 # Checkout and install the The Windowed Conformal Model (latest):
 RUN git clone https://github.com/HASTE-project/windowed-conformal-model.git;cd /app/windowed-conformal-model;git checkout master;pip3 install -e .
@@ -17,6 +17,9 @@ RUN git clone https://github.com/HASTE-project/windowed-conformal-model.git;cd /
 RUN pip3 install numpy
 RUN pip3 install Pillow
 RUN pip3 install scikit-image
+
+# TODO investigate installing scikit-sparse here?
+#RUN conda install -c conda-forge scikit-sparse
 
 # Make port 80 available (required for the listening daemon)
 EXPOSE 80
