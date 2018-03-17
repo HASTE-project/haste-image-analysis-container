@@ -8,6 +8,8 @@ Example processing node for [HASTE](http://haste.research.it.uu.se) for use with
 
 
 ## Build and Publish for use in HIO:
+We use --no-cache because otherwise calls to 'git clone' get cached - rather than pulling latest code!
+
 ```
-docker build -t "benblamey/haste-image-proc:latest" . ; docker push benblamey/haste-image-proc:latest
+docker build --no-cache=true -t "benblamey/haste-image-proc:latest" . ; docker push benblamey/haste-image-proc:latest
 ```
