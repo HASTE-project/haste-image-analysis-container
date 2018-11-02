@@ -7,7 +7,7 @@ Example processing node for [HASTE](http://haste.research.it.uu.se) for use with
 * Auto-configuration of HASTE storage client.
 
 
-## Build and Publish for use in HIO:
+## Build and Publish for use in HarmonicIO:
 We use --no-cache because otherwise calls to 'git clone' get cached - rather than pulling latest code!
 
 ```

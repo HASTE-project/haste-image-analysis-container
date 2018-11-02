@@ -27,12 +27,14 @@ def __get_haste_storage_client_config():
         return None  # Client will attempt to read config from this file if passed 'None'.
 
     # Otherwise, use the auto-configuration server:
-    for host in ['192.168.1.7',  # metadata-db-prod (private) - first for high perf in production deployment.
+    # There is no DNS for SNIC, so hostnames won't work here. (unless /etc/hosts is updated inside the container).
+    for host in ['192.168.1.28',  # metadata-db-prod (private)
                  '130.239.81.96',  # metadata-db-prod (public)
                  '127.0.0.1']:
         try:
             return __get_magic_haste_client_config_from_server(host)
-        except:
+        except Exception as e:
+            print(e)
             print('...failed')
     print('failed reading config from all locations', flush=True)
 
