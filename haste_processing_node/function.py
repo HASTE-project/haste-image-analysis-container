@@ -1,8 +1,10 @@
 from harmonicPE.daemon import listen_for_tasks
 
+from haste_processing_node.image_analysis.image_analysis import extract_features
 from .haste_storage_client_cache import get_storage_client
-from .image_analysis.image_analysis import extract_image_features
-from .simulator_messages import split_data_from_simulator
+from .simulator_messages import split_metadata_and_data
+
+GREEN_COLOR_CHANNEL = 2
 
 
 # TODO: This will break on MACOSX (see HIO code for fix)
@@ -12,7 +14,7 @@ from .simulator_messages import split_data_from_simulator
 def process_data(message_bytes):
     print('message received with length bytes: ' + str(len(message_bytes)), flush=True)
 
-    metadata, image_bytes = split_data_from_simulator(message_bytes)
+    metadata, image_bytes = split_metadata_and_data(message_bytes)
 
     extracted_features = extract_image_features(metadata, image_bytes)
 
@@ -36,6 +38,13 @@ def process_data(message_bytes):
                               metadata)
 
     print('saved to storage!', flush=True)
+
+
+def extract_image_features(metadata, image_bytes):
+    if metadata['color_channel'] == GREEN_COLOR_CHANNEL or metadata['tag'] == 'vironova':
+        return extract_features(image_bytes)
+    else:
+        return {}
 
 
 # TODO: add toy example with local image to run extraction locally.

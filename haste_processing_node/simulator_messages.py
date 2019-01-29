@@ -1,7 +1,7 @@
 import pickle
 
 
-def split_data_from_simulator(message_bytes):
+def split_metadata_and_data(message_bytes):
     # Format is a concatenation of a pickled dictionary, then the image bytes:
 
     metadata = pickle.loads(message_bytes)  # Note: Bytes past the pickled object’s representation are ignored.
@@ -21,7 +21,7 @@ def split_data_from_simulator(message_bytes):
 if __name__ == '__main__':
     # Test
     some_bytes = b'foo'
-    metadata, image_bytes = split_data_from_simulator(
+    metadata, image_bytes = split_metadata_and_data(
         bytearray(
             pickle.dumps(
                 {'foo': 123,
