@@ -2,4 +2,4 @@
 
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
-docker push benblamey/benblamey/haste-image-proc:latest
+docker push benblamey/haste-image-proc:latest
