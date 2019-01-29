@@ -4,7 +4,7 @@ notifications:
   email: false
 
 before_install:
-  - docker build --no-cache=true -t "haste-image-proc:latest" .
+  - docker build --no-cache=true -t "benblamey/haste-image-proc:latest" .
 
 script:
 - pytest
