@@ -41,7 +41,7 @@ def process_data(message_bytes):
 
 
 def extract_image_features(metadata, image_bytes):
-    if metadata['color_channel'] == GREEN_COLOR_CHANNEL or metadata['tag'] == 'vironova':
+    if (metadata.get('color_channel', None) == GREEN_COLOR_CHANNEL) or metadata.get('tag', None) == 'vironova':
         return extract_features(image_bytes)
     else:
         return {}
