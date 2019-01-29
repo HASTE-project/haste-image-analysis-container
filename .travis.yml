@@ -1,0 +1,15 @@
+language: python
+
+
+before_install:
+  - docker build --no-cache=true -t "haste-image-proc:latest" .
+
+script:
+- pytest
+
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch: master
+
