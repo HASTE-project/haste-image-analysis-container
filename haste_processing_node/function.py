@@ -1,3 +1,5 @@
+import time
+
 from harmonicPE.daemon import listen_for_tasks
 
 from haste_processing_node.image_analysis.image_analysis import extract_features
@@ -25,21 +27,30 @@ def process_data(message_bytes):
 
     if metadata.get('tag', None) == 'vironova':
         # Vironova image stream
-        extracted_features = extract_features(image_bytes)
         haste_storage_client = get_storage_client_vironova(stream_id)
+
+        start = time.time()
+        extracted_features = extract_features(image_bytes)
+        end = time.time()
+        extraction_time_secs = end - start
 
     else:
         # Assume AZ LNP dataset (from simulator)
         # TODO: simulator should send a 'tag'
         # Use a client with the conformal prediction
         haste_storage_client = get_storage_client_az_lnp(stream_id)
+
+        start = time.time()
         if metadata.get('color_channel', None) == AZN_LNP_GREEN_COLOR_CHANNEL:
             extracted_features = extract_features(image_bytes)
         else:
             extracted_features = {}
+        end = time.time()
+        extraction_time_secs = end - start
 
     # TODO: rename to 'course_features' or 'features_level_0' ?
     metadata['extracted_features'] = extracted_features
+    metadata['extraction_time_secs'] = extraction_time_secs
     # metadata['containerID'] = hostname
 
     haste_storage_client.save(timestamp_cloud_edge,
