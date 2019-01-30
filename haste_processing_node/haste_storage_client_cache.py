@@ -75,11 +75,11 @@ def get_storage_client_vironova(stream_id):
 
         print('creating client for stream ID: ' + stream_id, flush=True)
 
-        haste_storage_clients_az_lnp[stream_id] = client
+        haste_storage_clients_vironova[stream_id] = client
 
     # TODO: only cache N clients.
 
-    return haste_storage_clients_az_lnp[stream_id]
+    return haste_storage_clients_vironova[stream_id]
 
 
 if __name__ == '__main__':
