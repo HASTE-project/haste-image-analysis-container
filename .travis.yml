@@ -12,7 +12,8 @@ install:
 # See Dockerfile
 
 # Checkout and install Harmonic PE (latest):
-- RUN git clone https://github.com/HASTE-project/HarmonicPE.git;cd /app/HarmonicPE
+- RUN git clone https://github.com/HASTE-project/HarmonicPE.git
+- cd /app/HarmonicPE
 - git checkout master
 - pip3 install .
 
