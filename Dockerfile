@@ -15,7 +15,8 @@ RUN git clone https://github.com/HASTE-project/HarmonicPE.git;cd /app/HarmonicPE
 #RUN git clone https://github.com/HASTE-project/HasteStorageClient.git;cd /app/HasteStorageClient;git checkout v0.8;pip3 install -e .
 
 # Checkout and install the The Windowed Conformal Model (latest):
-RUN git clone https://github.com/HASTE-project/windowed-conformal-model.git;cd /app/windowed-conformal-model;git checkout master;pip3 install .
+# This needs to use -e for the npy files.
+RUN git clone https://github.com/HASTE-project/windowed-conformal-model.git;cd /app/windowed-conformal-model;git checkout master;pip3 install -e .
 
 # Install packages for image analysis
 # TODO: use setup.py for dependencies.
