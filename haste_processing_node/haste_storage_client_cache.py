@@ -6,7 +6,8 @@ import json
 import os.path
 import urllib.request
 
-haste_storage_clients = {}
+haste_storage_clients_az_lnp = {}
+haste_storage_clients_vironova = {}
 
 
 def __get_magic_haste_client_config_from_server(host):
@@ -39,8 +40,9 @@ def __get_haste_storage_client_config():
     print('failed reading config from all locations', flush=True)
 
 
-def get_storage_client(stream_id):
-    if stream_id not in haste_storage_clients:
+def get_storage_client_az_lnp(stream_id):
+    # For the Vironova dataset, streamed from microscope.
+    if stream_id not in haste_storage_clients_az_lnp:
         haste_storage_client_config = __get_haste_storage_client_config()
 
         model = ConformalInterestingnessModel()
@@ -52,11 +54,32 @@ def get_storage_client(stream_id):
 
         print('creating client for stream ID: ' + stream_id, flush=True)
 
-        haste_storage_clients[stream_id] = client
+        haste_storage_clients_az_lnp[stream_id] = client
 
     # TODO: only cache N clients.
 
-    return haste_storage_clients[stream_id]
+    return haste_storage_clients_az_lnp[stream_id]
+
+
+def get_storage_client_vironova(stream_id):
+    if stream_id not in haste_storage_clients_vironova:
+        haste_storage_client_config = __get_haste_storage_client_config()
+
+        # Default to 1.0
+        model = None
+
+        client = HasteStorageClient(stream_id,
+                                    config=haste_storage_client_config,
+                                    interestingness_model=model,
+                                    storage_policy=[(0.0, 1.0, OS_SWIFT_STORAGE)])  # discard blobs which don't match the policy.
+
+        print('creating client for stream ID: ' + stream_id, flush=True)
+
+        haste_storage_clients_vironova[stream_id] = client
+
+    # TODO: only cache N clients.
+
+    return haste_storage_clients_vironova[stream_id]
 
 
 if __name__ == '__main__':
