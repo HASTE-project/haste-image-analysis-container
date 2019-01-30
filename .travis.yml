@@ -16,6 +16,7 @@ install:
 - cd HarmonicPE
 - git checkout master
 - pip3 install .
+- cd ..
 
 # Checkout and install the The Windowed Conformal Model (latest):
 # This needs to use -e for the .npy files.
@@ -23,8 +24,8 @@ install:
 - cd windowed-conformal-model
 - git checkout master
 - pip3 install -e .
-
 - cd ..
+
 - pip install .
 
 # Tests broken on Travis
