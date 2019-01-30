@@ -1,5 +1,5 @@
 import pytest
-from haste_processing_node.function import process_data, extract_image_features
+from haste_processing_node.function import process_data, extract_features
 import pickle
 import time
 
@@ -29,6 +29,5 @@ def test_extract_image_features():
     image_bytes = bytes(fh.read())
     fh.close()
 
-    extracted_features = extract_image_features({'location': (12.34, 56.78),
-                                                 'image_length_bytes': len(image_bytes)}, image_bytes)
+    extracted_features = extract_features(image_bytes)
     print(extracted_features)
