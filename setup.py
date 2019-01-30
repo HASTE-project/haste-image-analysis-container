@@ -9,8 +9,9 @@ setup(name='haste_image_analysis',
       install_requires=[
           'numpy',
           'Pillow',
-          'scikit-image'
+          'scikit-image',
           # HarmonicIO_PE -- (not on PyPI)
+          'haste-storage-client'
 
       ],
       test_requires=[

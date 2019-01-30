@@ -48,8 +48,7 @@ def get_storage_client(stream_id):
         client = HasteStorageClient(stream_id,
                                     config=haste_storage_client_config,
                                     interestingness_model=model,
-                                    storage_policy=[(0.5, 1.0, OS_SWIFT_STORAGE)],
-                                    default_storage=TRASH)  # discard blobs which don't match the policy above.
+                                    storage_policy=[(0.5, 1.0, OS_SWIFT_STORAGE)])  # discard blobs which don't match the policy.
 
         print('creating client for stream ID: ' + stream_id, flush=True)
 
