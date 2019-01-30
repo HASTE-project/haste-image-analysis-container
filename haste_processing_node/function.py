@@ -4,6 +4,7 @@ from haste_processing_node.image_analysis.image_analysis import extract_features
 from .haste_storage_client_cache import get_storage_client
 from .simulator_messages import split_metadata_and_data
 
+# This constant seems to be specific to the microscope/AZN
 GREEN_COLOR_CHANNEL = 2
 
 

@@ -4,8 +4,6 @@ import numpy as np
 from skimage.feature import greycomatrix, greycoprops
 from skimage.filters import laplace
 
-# This constant seems to be specific to the microscope/AZN
-from haste_processing_node.function import extract_image_features
 
 
 def __laplace_variance(im):
@@ -35,12 +33,3 @@ def extract_features(image_bytes):
     return extracted_features
 
 
-if __name__ == '__main__':
-    # Test extraction with the dummy image
-    fh = open('dummy_image_0.tif', 'rb')
-    image_bytes = bytes(fh.read())
-    fh.close()
-
-    extracted_features = extract_image_features({'location': (12.34, 56.78),
-                                                 'image_length_bytes': len(image_bytes)}, image_bytes)
-    print(extracted_features)
