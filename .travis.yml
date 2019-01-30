@@ -9,16 +9,24 @@ notifications:
 
 
 install:
-  # See Dockerfile
-#- pip install git+https://github.com/HASTE-project/HarmonicPE.git@master
-#- pip install git+https://github.com/HASTE-project/windowed-conformal-model.git@master
-#- pip install git+https://github.com/HASTE-project/HasteStorageClient.git@v0.8
+# See Dockerfile
+
+# Checkout and install Harmonic PE (latest):
+- RUN git clone https://github.com/HASTE-project/HarmonicPE.git;cd /app/HarmonicPE
+- git checkout master
+- pip3 install .
+
+# Checkout and install the The Windowed Conformal Model (latest):
+# This needs to use -e for the .npy files.
+- RUN git clone https://github.com/HASTE-project/windowed-conformal-model.git
+- cd /app/windowed-conformal-model
+- git checkout master;pip3 install -e .
 
 - pip install .
 
 # Tests broken on Travis
 script:
-- pytest test2
+- pytest tests
 
 before_deploy:
 - docker build --no-cache=true -t "benblamey/haste-image-proc:latest" .
