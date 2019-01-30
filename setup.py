@@ -15,6 +15,5 @@ setup(name='haste_image_analysis',
       ],
       test_requires=[
           'pytest'
-
       ]
       )

@@ -1,3 +1,4 @@
+import pytest
 from haste_processing_node.function import process_data, extract_image_features
 import pickle
 import time

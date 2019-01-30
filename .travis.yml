@@ -9,7 +9,7 @@ install:
 - pip install git+https://github.com/HASTE-project/HasteStorageClient.git@v0.8
 - pip install git+https://github.com/HASTE-project/windowed-conformal-model.git@master
 
-- pip install -e .
+- pip install .
 
 before_install:
   - docker build --no-cache=true -t "benblamey/haste-image-proc:latest" .
